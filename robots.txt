@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dscookie-0422.github.io/sitemap.xml

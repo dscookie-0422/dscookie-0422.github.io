@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>월세 vs 전세 손익 비교 계산기 | 전세대출 이자·기회비용</title>
+<meta name="description" content="월세와 전세의 실제 비용을 비교합니다. 전세대출 이자와 보증금 기회비용을 반영해 연간 비용, 기간 총비용, 판단이 뒤집히는 월세 수준까지 계산하는 무료 계산기입니다.">
+<meta name="keywords" content="월세 전세 비교, 전세 월세 계산기, 전세대출 이자, 기회비용, 반전세 비교, 주거비 계산">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="생활 금융 계산기">
+<meta name="theme-color" content="#0f2447">
+<meta name="naver-site-verification" content="0c094f9c82a10c5fcd5292b5a2744684c0ecfee2">
+<meta name="google-site-verification" content="ROz-ZBABKqWs14o1I1dBc0h49IidcUGDRy0BjunFj2M">
+<link rel="canonical" href="https://dscookie-0422.github.io/tools/rent-vs-jeonse.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="생활 금융 계산기">
+<meta property="og:title" content="월세 vs 전세 손익 비교 계산기 | 전세대출 이자·기회비용">
+<meta property="og:description" content="월세와 전세의 실제 비용을 비교합니다. 전세대출 이자와 보증금 기회비용을 반영해 연간 비용, 기간 총비용, 판단이 뒤집히는 월세 수준까지 계산하는 무료 계산기입니다.">
+<meta property="og:url" content="https://dscookie-0422.github.io/tools/rent-vs-jeonse.html">
+<meta property="og:image" content="https://dscookie-0422.github.io/web-ad/og-image.png">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="월세 vs 전세 손익 비교 계산기 | 전세대출 이자·기회비용">
+<meta name="twitter:description" content="월세와 전세의 실제 비용을 비교합니다. 전세대출 이자와 보증금 기회비용을 반영해 연간 비용, 기간 총비용, 판단이 뒤집히는 월세 수준까지 계산하는 무료 계산기입니다.">
+<meta name="twitter:image" content="https://dscookie-0422.github.io/web-ad/og-image.png">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f2447'/%3E%3Cpath d='M18 40l10-10 6 6 12-14' stroke='%237ce0bb' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/site.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6285965398350241" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "월세 vs 전세 손익 비교 계산기",
+  "url": "https://dscookie-0422.github.io/tools/rent-vs-jeonse.html",
+  "description": "월세와 전세의 실제 비용을 비교합니다. 전세대출 이자와 보증금 기회비용을 반영해 연간 비용, 기간 총비용, 판단이 뒤집히는 월세 수준까지 계산하는 무료 계산기입니다.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "ko-KR",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "KRW"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "생활 금융 계산기",
+    "url": "https://dscookie-0422.github.io/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "전세대출 이자는 비용에 넣어야 하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "넣어야 합니다. 전세대출 이자는 매달 금융기관에 나가는 현금이라 월세와 성격이 같습니다. 이자를 빼고 비교하면 전세가 실제보다 싸게 보입니다. 이 계산기는 전세대출 이자와 자기자금 기회비용을 모두 전세 비용에 포함합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "기회비용 수익률은 몇 %로 넣어야 하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "목돈을 실제로 어디에 둘지에 맞춰 넣으세요. 예금·적금이면 연 3% 안팎, 채권·배당주면 4~5%, 그냥 통장에 두면 0%입니다. 수익률을 높게 잡을수록 전세 비용이 커져 월세가 유리하게 나옵니다. 0%와 4% 두 가지로 각각 계산해 보면 판단이 흔들리지 않습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "보증금이 있는 월세는 어떻게 비교하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "월세 보증금도 목돈이 묶이는 것이므로 기회비용에 포함합니다. 보증금 5,000만 원, 월세 120만 원, 수익률 3%라면 연간 비용은 1,440만 원 + 150만 원 = 1,590만 원입니다. 보증금을 올려 월세를 낮춘 조건도 같은 방식으로 넣어 비교하세요."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "전세가 유리하다고 나오면 무조건 전세가 좋은가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "숫자는 비용만 봅니다. 전세는 계약 종료 시 보증금을 돌려받아야 하고, 집주인의 반환 능력에 따라 위험이 생깁니다. 전세가율이 80%를 넘거나 임대인이 다주택자라면 전세보증금 반환보증 가입을 확인하세요. 월세는 매달 현금이 나가지만 보증금 위험이 작고 이사가 자유롭다는 장점이 있습니다."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html" aria-label="생활 금융 계산기 홈">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15l4.5-4.5 3.5 3.5L20 6"/><path d="M20 11V6h-5"/></svg>
+      </span>
+      <span>생활 금융 계산기</span>
+    </a>
+    <nav class="tool-nav" aria-label="무료 계산기 10종">
+      <a href="https://dscookie-0422.github.io/web-ad/">대출 갈아타기</a>
+      <a href="loan-interest.html">주담대 이자</a>
+      <a href="dsr-calculator.html">DSR 한도</a>
+      <a href="property-tax-fee.html">취득세·복비</a>
+      <a href="rent-vs-jeonse.html" class="on">월세vs전세</a>
+      <a href="savings-calculator.html">예적금 이자</a>
+      <a href="salary-calculator.html">연봉 실수령</a>
+      <a href="severance-calculator.html">퇴직금·실업급여</a>
+      <a href="subscription-score.html">청약 가점</a>
+      <a href="capital-gains-tax.html">양도세</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <p class="crumb"><a href="../index.html">생활 금융 계산기</a> &rsaquo; 월세 vs 전세 손익 비교 계산기</p>
+    <div class="page-head">
+      <span class="kicker">전세대출 이자 · 목돈 기회비용</span>
+      <h1>월세 vs 전세 손익 비교 계산기</h1>
+      <p class="lede">전세 4억과 월세 120만 원, 어느 쪽이 실제로 더 나갈까요. 전세대출 이자와 목돈 기회비용까지 같은 단위로 바꿔 연간·기간 총비용을 비교합니다.</p>
+    </div>
+
+    <section class="calc" aria-label="계산기">
+      <form class="panel" id="calc-form" onsubmit="return false;">
+        <h2 class="panel-title">조건 입력</h2>
+        
+<div class="field">
+  <label for="j-price">전세 보증금</label>
+  <div class="input-line"><input id="j-price" type="number" value="400000000" step="1000000" min="0" inputmode="numeric"><span class="unit">원</span></div>
+  <span class="hint" id="j-hint">4억원</span>
+  <div class="chips">
+    <button type="button" data-set="j-price" data-val="200000000">2억</button>
+    <button type="button" data-set="j-price" data-val="300000000">3억</button>
+    <button type="button" data-set="j-price" data-val="400000000">4억</button>
+    <button type="button" data-set="j-price" data-val="600000000">6억</button>
+  </div>
+</div>
+<div class="row-2">
+  <div class="field">
+    <label for="j-rate">전세대출 금리</label>
+    <div class="input-line"><input id="j-rate" type="number" value="3.5" step="0.01" min="0" max="20" inputmode="decimal"><span class="unit">%</span></div>
+  </div>
+  <div class="field">
+    <label for="j-ratio">전세대출 비율</label>
+    <div class="input-line"><input id="j-ratio" type="number" value="80" step="5" min="0" max="100" inputmode="numeric"><span class="unit">%</span></div>
+  </div>
+</div>
+<div class="divider" style="margin:18px 0"></div>
+<div class="row-2">
+  <div class="field">
+    <label for="w-deposit">월세 보증금</label>
+    <div class="input-line"><input id="w-deposit" type="number" value="50000000" step="1000000" min="0" inputmode="numeric"><span class="unit">원</span></div>
+    <span class="hint" id="wd-hint">5,000만원</span>
+  </div>
+  <div class="field">
+    <label for="w-rent">월세</label>
+    <div class="input-line"><input id="w-rent" type="number" value="1200000" step="10000" min="0" inputmode="numeric"><span class="unit">원</span></div>
+    <span class="hint" id="wr-hint">120만원</span>
+  </div>
+</div>
+<div class="row-2">
+  <div class="field">
+    <label for="years">비교 기간</label>
+    <div class="input-line"><input id="years" type="number" value="2" step="1" min="1" max="10" inputmode="numeric"><span class="unit">년</span></div>
+  </div>
+  <div class="field">
+    <label for="yield">목돈 운용 수익률</label>
+    <div class="input-line"><input id="yield" type="number" value="3.0" step="0.1" min="0" max="20" inputmode="decimal"><span class="unit">%</span></div>
+    <span class="hint">보증금을 넣지 않았을 때 기대 수익</span>
+  </div>
+</div>
+<p class="mini">전세대출은 만기일시(이자만 납부) 가정입니다. 전세대출 비율을 0으로 두면 자기 자금만으로 전세를 구하는 경우를 계산합니다.</p>
+
+      </form>
+      <div class="result-panel" id="results" aria-live="polite">
+        
+<div class="big">
+  <span class="lbl" id="r-main-label">연간 비용 비교 결과</span>
+  <div class="val" id="r-main">-</div>
+  <div class="sub" id="r-main-sub">-</div>
+</div>
+<div class="bar-rows">
+  <div class="bar-row"><span class="bar-k">전세</span><div class="bar-track"><span class="bar-fill fill-j" id="bar-j"></span></div><span class="bar-v" id="bar-j-val">-</span></div>
+  <div class="bar-row"><span class="bar-k">월세</span><div class="bar-track"><span class="bar-fill fill-w" id="bar-w"></span></div><span class="bar-v" id="bar-w-val">-</span></div>
+</div>
+<p class="mini">막대는 연간 비용(이자·월세·기회비용 합계)입니다.</p>
+<div class="divider"></div>
+<dl class="kv">
+  <dt>전세 — 월 환산 비용</dt><dd id="r-j-month">-</dd>
+  <dt>월세 — 월 환산 비용</dt><dd id="r-w-month">-</dd>
+  <dt>전세 연간 비용</dt><dd class="em" id="r-j-year">-</dd>
+  <dt>월세 연간 비용</dt><dd class="em" id="r-w-year">-</dd>
+  <dt>전세 총비용 (기간)</dt><dd id="r-j-total">-</dd>
+  <dt>월세 총비용 (기간)</dt><dd id="r-w-total">-</dd>
+  <dt>연간 차액 (전세−월세)</dt><dd id="r-diff">-</dd>
+  <dt>기간 총 차액</dt><dd><strong id="r-diff-total">-</strong></dd>
+  <dt>전세대출 금액 · 자기자금</dt><dd><span id="r-loan">-</span> · <span id="r-cash">-</span></dd>
+  <dt>전세대출 이자</dt><dd id="r-j-int">-</dd>
+  <dt>자기자금 기회비용</dt><dd id="r-j-opp">-</dd>
+  <dt>전세와 같아지는 월세</dt><dd class="good" id="r-breakeven">-</dd>
+</dl>
+<div id="rent-note"></div>
+
+      </div>
+    </section>
+
+    <section class="content">
+      
+<h2>월세와 전세, 숫자로 비교하는 법</h2>
+<p>&ldquo;전세대출 이자가 아깝다&rdquo;는 말과 &ldquo;월세는 나가는 돈이다&rdquo;는 말이 동시에 도는 이유는, 두 방식의 비용 구조가 다르기 때문입니다. 전세는 <strong>목돈을 묶어 두는 비용</strong>이 들고, 월세는 <strong>매달 현금이 나가는 비용</strong>이 듭니다. 이 계산기는 두 비용을 같은 단위(연간 원)로 바꿔 놓고 비교합니다.</p>
+
+<h2>계산 공식</h2>
+<div class="formula">
+  <strong>전세 비용</strong> = 전세대출 이자 + (전세금 − 대출금) × 운용수익률<br>
+  &nbsp;&nbsp;전세대출 이자 = 전세금 × 대출비율 × 금리<br>
+  <strong>월세 비용</strong> = 월세 × 12 + 월세보증금 × 운용수익률<br>
+  <strong>차액</strong> = 전세 비용 − 월세 비용 &nbsp;(양수면 월세가 유리)
+</div>
+<p>핵심은 <strong>기회비용</strong>입니다. 전세로 4억 원을 맡기면 그 돈으로 얻을 수 있었던 이자·수익을 포기하게 됩니다. 월세 보증금 5,000만 원도 마찬가지입니다. 운용수익률을 0%로 두면 &ldquo;실제로 나가는 현금&rdquo;만 비교하는 셈이고, 3~4%로 두면 &ldquo;목돈을 굴렸다면 얻었을 수익까지 포함&rdquo;한 비교가 됩니다.</p>
+
+<h2>전세대출 이자는 왜 이자가 아니라 비용인가요</h2>
+<p>전세대출로 낸 이자는 집주인에게 가는 돈이 아니라 금융기관에 내는 비용입니다. 월세와 똑같이 매달 사라지는 돈이므로, 두 방식을 비교할 때는 반드시 전세 쪽 비용에 포함해야 합니다. 전세대출 비율을 80%로 두면 4억 원 전세에서 대출 3억 2,000만 원, 자기자금 8,000만 원으로 계산합니다.</p>
+
+<h2>실제 예시로 보기</h2>
+<p>전세 4억 원, 전세대출 80%·연 3.5%, 월세 보증금 5,000만 원·월세 120만 원, 운용수익률 3%라면 이렇게 됩니다.</p>
+<div class="tbl-wrap">
+  <table class="tbl">
+    <thead><tr><th>항목</th><th>전세</th><th>월세</th></tr></thead>
+    <tbody>
+      <tr><td>연간 이자·월세</td><td>1,120만 원</td><td>1,440만 원</td></tr>
+      <tr><td>목돈 기회비용</td><td>240만 원(자기자금 8,000만 원)</td><td>150만 원(보증금 5,000만 원)</td></tr>
+      <tr><td>연간 총비용</td><td>1,360만 원</td><td>1,590만 원</td></tr>
+      <tr><td>월 환산</td><td>113만 원</td><td>132만 원</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>이 조건에서는 전세가 연 230만 원 저렴합니다. 하지만 전세대출 금리가 4.5%로 오르면 전세 비용이 1,680만 원이 되어 월세보다 비싸집니다. <strong>금리 1%p가 판단을 뒤집는 지점</strong>이 생기므로, 금리를 0.5%p씩 올려 가며 다시 계산해 보는 것이 좋습니다.</p>
+
+<h2>숫자 밖에서 봐야 하는 것</h2>
+<ul>
+  <li><strong>보증금 회수 위험</strong> — 전세는 계약이 끝날 때 목돈을 돌려받아야 합니다. 전세가율이 높거나 다주택 임대인이라면 전세보증금 반환보증(HUG·HF) 가입 여부를 확인하세요.</li>
+  <li><strong>재계약·이사 비용</strong> — 2년마다 이사하면 중개보수와 이사비가 반복됩니다. 전세를 길게 유지할 수 있는지도 비용입니다.</li>
+  <li><strong>금리 변동</strong> — 전세대출은 대부분 변동금리이거나 6개월·1년 단위로 조정됩니다. 금리 상승 시나리오에서도 감당 가능한지 보세요.</li>
+  <li><strong>월세의 협상 여지</strong> — 보증금을 올리면 월세를 낮출 수 있습니다. 보증금 1,000만 원을 더 넣고 월세 5만 원을 깎는 조건이 유리한지도 이 계산기로 확인할 수 있습니다.</li>
+  <li><strong>주거 안정성</strong> — 월세는 갱신 계약에서 보증금·월세 인상 요구를 받을 수 있습니다. 5% 인상 상한이 있지만 2년마다 반복됩니다.</li>
+</ul>
+
+<h2>이럴 때 써 보세요</h2>
+<ul>
+  <li>전세와 월세 매물을 두고 고민할 때 — 두 조건을 그대로 넣으면 연간·기간 총비용 차이가 나옵니다.</li>
+  <li>전세대출 금리가 오를 때 — 금리를 0.5%p씩 올려 어느 지점에서 판단이 뒤집히는지 확인합니다.</li>
+  <li>반전세(보증금 + 월세)를 비교할 때 — 보증금과 월세를 넣고 보증금을 올린 조건을 다시 계산합니다.</li>
+  <li>전세를 월세로 돌릴지 고민될 때 — &lsquo;전세와 같아지는 월세&rsquo; 값보다 실제 월세가 낮으면 월세가 유리합니다.</li>
+</ul>
+
+    </section>
+
+    <section class="faq">
+      <h2>자주 묻는 질문</h2>
+      <details class="qa">
+  <summary>전세대출 이자는 비용에 넣어야 하나요?</summary>
+  <div class="a"><p>넣어야 합니다. 전세대출 이자는 매달 금융기관에 나가는 현금이라 월세와 성격이 같습니다. 이자를 빼고 비교하면 전세가 실제보다 싸게 보입니다. 이 계산기는 전세대출 이자와 자기자금 기회비용을 모두 전세 비용에 포함합니다.</p></div>
+</details>
+<details class="qa">
+  <summary>기회비용 수익률은 몇 %로 넣어야 하나요?</summary>
+  <div class="a"><p>목돈을 실제로 어디에 둘지에 맞춰 넣으세요. 예금·적금이면 연 3% 안팎, 채권·배당주면 4~5%, 그냥 통장에 두면 0%입니다. 수익률을 높게 잡을수록 전세 비용이 커져 월세가 유리하게 나옵니다. 0%와 4% 두 가지로 각각 계산해 보면 판단이 흔들리지 않습니다.</p></div>
+</details>
+<details class="qa">
+  <summary>보증금이 있는 월세는 어떻게 비교하나요?</summary>
+  <div class="a"><p>월세 보증금도 목돈이 묶이는 것이므로 기회비용에 포함합니다. 보증금 5,000만 원, 월세 120만 원, 수익률 3%라면 연간 비용은 1,440만 원 + 150만 원 = 1,590만 원입니다. 보증금을 올려 월세를 낮춘 조건도 같은 방식으로 넣어 비교하세요.</p></div>
+</details>
+<details class="qa">
+  <summary>전세가 유리하다고 나오면 무조건 전세가 좋은가요?</summary>
+  <div class="a"><p>숫자는 비용만 봅니다. 전세는 계약 종료 시 보증금을 돌려받아야 하고, 집주인의 반환 능력에 따라 위험이 생깁니다. 전세가율이 80%를 넘거나 임대인이 다주택자라면 전세보증금 반환보증 가입을 확인하세요. 월세는 매달 현금이 나가지만 보증금 위험이 작고 이사가 자유롭다는 장점이 있습니다.</p></div>
+</details>
+    </section>
+
+    <p class="disclaimer"><strong>참고용 안내.</strong> 이 계산기는 전세대출을 만기일시 상환으로 가정하고, 보증금 반환 위험·이사비·중개보수·세금(임대소득세 등)은 포함하지 않습니다. 실제 주거 비용은 계약 조건과 금리 변동에 따라 달라지므로 참고용으로만 활용하세요.</p>
+
+    <section class="related">
+  <h2>함께 쓰면 좋은 계산기</h2>
+  <div class="cards">
+    <a class="card" href="https://dscookie-0422.github.io/web-ad/">
+  <span class="num">01 · 무료</span>
+  <h3>🔄 대출 갈아타기 손익 계산기</h3>
+  <p>중도상환수수료·부대비용·LTV까지 넣고 갈아타면 본전 찾는 개월 수를 계산합니다.</p>
+</a><a class="card" href="loan-interest.html">
+  <span class="num">02 · 무료</span>
+  <h3>🏠 주택담보·전세대출 월 이자 계산기</h3>
+  <p>원리금균등·원금균등·만기일시·체증식 상환방식을 비교하고 연도별 상환표를 봅니다.</p>
+</a><a class="card" href="dsr-calculator.html">
+  <span class="num">03 · 무료</span>
+  <h3>📊 DSR·대출 한도 계산기</h3>
+  <p>연소득과 기존 대출로 스트레스 DSR을 반영한 예상 대출 한도를 계산합니다.</p>
+</a>
+  </div>
+</section>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <span class="brand-foot">생활 금융 계산기</span>
+        <p>회원가입도, 앱 설치도 없이 브라우저에서 바로 쓰는 무료 생활 금융 계산기 10종입니다. 입력한 값은 서버로 전송되지 않습니다.</p>
+      </div>
+      <div>
+        <h2>계산기 10종</h2>
+        <div class="footer-links">
+        <a href="https://dscookie-0422.github.io/web-ad/">대출 갈아타기 손익 계산기</a>
+        <a href="loan-interest.html">주택담보·전세대출 월 이자 계산기</a>
+        <a href="dsr-calculator.html">DSR·대출 한도 계산기</a>
+        <a href="property-tax-fee.html">부동산 취득세·중개보수 계산기</a>
+        <a href="rent-vs-jeonse.html">월세 vs 전세 손익 비교 계산기</a>
+        <a href="savings-calculator.html">적금·예금 만기 실수령액 계산기</a>
+        <a href="salary-calculator.html">연봉 실수령액·4대보험 계산기</a>
+        <a href="severance-calculator.html">퇴직금·실업급여 예상액 계산기</a>
+        <a href="subscription-score.html">청약 가점 계산기</a>
+        <a href="capital-gains-tax.html">양도소득세 간이 계산기</a>
+        </div>
+      </div>
+      <div>
+        <h2>안내</h2>
+        <p><a href="../privacy.html">개인정보처리방침</a></p>
+        <p><a href="../index.html">전체 도구 보기</a></p>
+        <p>계산 결과는 참고용이며, 실제 조건은 금융기관·관할 관청의 안내와 약정서로 확인해 주세요.</p>
+      </div>
+    </div>
+    <p class="copy">© 2026 생활 금융 계산기. 계산 결과는 참고용 추정치이며 금융상품 중개나 세무 자문을 하지 않습니다.</p>
+  </div>
+</footer>
+
+<script>
+
+function $(id){return document.getElementById(id);}
+function n(id){var el=$(id); if(!el) return 0; var v=String(el.value).replace(/[^0-9.\-]/g,''); var f=parseFloat(v); return isFinite(f)?f:0;}
+function won(x){var v=Math.round(x); return (v<0?'-':'')+Math.abs(v).toLocaleString('ko-KR')+'원';}
+function num(x){return Math.round(x).toLocaleString('ko-KR');}
+function eok(x){ // 원 -> 억/만원 사람이 읽는 형태
+  var v=Math.round(x);
+  if(v===0) return '0원';
+  var neg=v<0; v=Math.abs(v);
+  var eok=Math.floor(v/100000000), man=Math.floor((v%100000000)/10000), wonR=v%10000;
+  var s='';
+  if(eok) s+=eok.toLocaleString('ko-KR')+'억 ';
+  if(man) s+=man.toLocaleString('ko-KR')+'만';
+  if(!eok&&!man) return (neg?'-':'')+v.toLocaleString('ko-KR')+'원';
+  if(wonR) s+=' '+wonR.toLocaleString('ko-KR')+'원';
+  else s+='원';
+  return (neg?'-':'')+s.trim();
+}
+function pct(x,d){ if(!isFinite(x)) x=0; var q=Math.pow(10,d==null?1:d); return (Math.round(x*q)/q).toFixed(d==null?1:d); }
+function setText(id,txt){var el=$(id); if(el){ if(el.tagName==='INPUT') el.value=txt; else el.textContent=txt; } }
+function monthlyPayment(P, annualRate, months){ // 원리금균등 월 납입액
+  var i=annualRate/100/12;
+  if(months<=0) return 0;
+  if(i===0) return P/months;
+  return P*i/(1-Math.pow(1+i,-months));
+}
+function bindCalc(fn){
+  document.querySelectorAll('input,select').forEach(function(el){
+    el.addEventListener('input',fn); el.addEventListener('change',fn);
+  });
+  document.querySelectorAll('button[data-set]').forEach(function(b){
+    b.addEventListener('click',function(ev){
+      ev.preventDefault();
+      var el=$(b.getAttribute('data-set'));
+      if(el){ el.value=b.getAttribute('data-val'); fn(); }
+    });
+  });
+  fn();
+}
+
+
+function calcRent(){
+  var jeonse = n('j-price'), jRate = n('j-rate'), jRatio = n('j-ratio');
+  var wDep = n('w-deposit'), wRent = n('w-rent');
+  var years = Math.max(1, n('years'));
+  var yieldPct = n('yield');
+
+  var loan = jeonse*jRatio/100;
+  var myCashJ = Math.max(0, jeonse - loan);
+  var jInterest = loan*jRate/100;
+  var jOpp = myCashJ*yieldPct/100;
+  var jAnnual = jInterest + jOpp;
+
+  var wOpp = wDep*yieldPct/100;
+  var wAnnual = wRent*12 + wOpp;
+
+  var diff = jAnnual - wAnnual;   // 양수면 전세가 더 비쌈 = 월세 유리
+  var jMonthly = jAnnual/12, wMonthly = wAnnual/12;
+
+  var better = diff > 0 ? '월세' : (diff < 0 ? '전세' : '비슷함');
+  var saveAbs = Math.abs(diff);
+
+  setText('r-main', better==='비슷함' ? '비슷합니다' : (better + '가 유리합니다'));
+  setText('r-main-label', '연간 비용 비교 결과');
+  setText('r-main-sub', better==='비슷함'
+      ? '연간 비용 차이가 거의 없습니다'
+      : ('연 ' + won(saveAbs) + ' · ' + years + '년이면 ' + eok(saveAbs*years) + ' 차이'));
+
+  setText('r-j-month', won(jMonthly));
+  setText('r-w-month', won(wMonthly));
+  setText('r-j-year', won(jAnnual));
+  setText('r-w-year', won(wAnnual));
+  setText('r-j-total', won(jAnnual*years));
+  setText('r-w-total', won(wAnnual*years));
+  setText('r-diff', (diff>=0?'+':'') + won(diff) + ' / 년');
+  setText('r-diff-total', (diff>=0?'+':'') + won(diff*years));
+  setText('j-hint', eok(jeonse));
+  setText('wd-hint', eok(wDep));
+  setText('wr-hint', eok(wRent));
+  setText('r-loan', eok(loan));
+  setText('r-cash', eok(myCashJ));
+  setText('r-j-int', won(jInterest) + ' / 년');
+  setText('r-j-opp', won(jOpp) + ' / 년');
+
+  // 손익분기 월세: 전세 비용과 같아지는 월세 (보증금은 현재 월세 보증금 가정)
+  var be = (jAnnual - wOpp)/12;
+  setText('r-breakeven', won(Math.max(0,be)));
+
+  var max = Math.max(jAnnual, wAnnual, 1);
+  $('bar-j').style.width = (jAnnual/max*100).toFixed(1)+'%';
+  $('bar-w').style.width = (wAnnual/max*100).toFixed(1)+'%';
+  $('bar-j-val').textContent = won(jAnnual);
+  $('bar-w-val').textContent = won(wAnnual);
+
+  var note = '';
+  if(jRatio>0 && myCashJ<0) note = '<div class="note warn">전세대출이 보증금보다 많습니다. 대출 비율을 다시 확인해 주세요.</div>';
+  else if(jAnnual>0 && Math.abs(diff)/Math.max(jAnnual,wAnnual) < 0.05) note = '<div class="note">차이가 5% 안쪽이라 어느 쪽을 골라도 비슷합니다. 이사 부담·집 상태·재계약 조건을 함께 보세요.</div>';
+  else note = '<div class="note ' + (diff>0?'good':'') + '">' + (diff>0
+      ? '같은 기간 동안 <strong>월세</strong>가 ' + eok(Math.abs(diff)*years) + ' 저렴합니다. 다만 보증금을 돌려받는 시점과 집값 변동은 따로 봐야 합니다.'
+      : '같은 기간 동안 <strong>전세</strong>가 ' + eok(Math.abs(diff)*years) + ' 저렴합니다. 대출 금리가 오르면 차이가 줄어들 수 있습니다.') + '</div>';
+  $('rent-note').innerHTML = note;
+}
+bindCalc(calcRent);
+
+</script>
+</body>
+</html>

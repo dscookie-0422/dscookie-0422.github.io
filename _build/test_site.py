@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Verify the 10-tool portal: console errors, links, calculations, responsive layout."""
+"""Verify the 11-tool portal: console errors, links, calculations, responsive layout."""
 import http.server
 import json
 import re
@@ -10,7 +10,7 @@ import threading
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PORT = 8765
-SHOTS = os.path.join(os.path.dirname(ROOT), "..", "handoffs", "🛠️-금융-실용-웹툴-10종-확장-및-배포", "shots")
+SHOTS = os.path.join(os.path.dirname(ROOT), "..", "handoffs", "🧮-11호-웹툴-연말정산-환급-계산기-제작-배포", "shots")
 
 FAIL = []
 OK = []
@@ -113,6 +113,85 @@ def exp_severance(work_days, wage3, m3days):
     return daily * 30 * (work_days / 365), daily
 
 
+def exp_yet(gross, deps=2, kids=1, cc=18000000, chk=6000000, mkt=0, tr=0,
+            pension=2000000, irp=0, rent=0, jeonse=0, insurance=0, medical=0, donation=0,
+            marriage=False):
+    """2026년 귀속 연말정산 미러 계산(페이지 JS와 동일 순서)."""
+    BR = [(14000000, .06, 0), (50000000, .15, 1260000), (88000000, .24, 5760000),
+          (150000000, .35, 15440000), (300000000, .38, 19940000), (500000000, .40, 25940000),
+          (1000000000, .42, 35940000), (float("inf"), .45, 65940000)]
+
+    def prog(b):
+        b = int(b // 1)
+        if b <= 0:
+            return 0
+        for lim, r, d in BR:
+            if b <= lim:
+                return max(0, b * r - d)
+
+    def earned(g):
+        if g <= 5000000: return g * .7
+        if g <= 15000000: return 3500000 + (g - 5000000) * .4
+        if g <= 45000000: return 7500000 + (g - 15000000) * .15
+        if g <= 100000000: return 12000000 + (g - 45000000) * .05
+        return min(20000000, 14750000 + (g - 100000000) * .02)
+
+    m = gross / 12
+    np_ = min(max(m, 400000), 6370000) * .0475 * 12
+    hi = m * .03595 * 12
+    hicare = hi + hi * .1314
+    ed = earned(gross)
+    inc = max(0, gross - ed)
+    personal = 1500000 * deps
+
+    limit = (3000000 if gross <= 70000000 else 2500000) + min(2, kids) * (500000 if gross <= 70000000 else 250000)
+    floor = gross * .25
+    if cc + chk + mkt + tr <= 0:
+        cardded = 0
+    else:
+        gd = cc * .15 + chk * .30 + mkt * .40 + tr * .40
+        if cc >= floor: cut = floor * .15
+        elif cc + chk >= floor: cut = cc * .15 + (floor - cc) * .30
+        else: cut = cc * .15 + chk * .30 + max(0, floor - cc - chk) * .40
+        raw = max(0, gd - cut)
+        over = max(0, raw - limit)
+        extra = min(over, mkt * .40 + tr * .40, 3000000 if gross <= 70000000 else 2000000)
+        cardded = min(raw, limit) + extra
+    house = min(jeonse, 4000000) * .40
+    base = int(max(0, inc - (personal + np_ + hicare + cardded + house)) // 1000 * 1000)
+    tax = prog(base)
+
+    def work_credit(t, g):
+        if t <= 0: return 0
+        c = t * .55 if t <= 1300000 else 715000 + (t - 1300000) * .3
+        cap = 740000 if g <= 33000000 else 660000 if g <= 70000000 else 500000 if g <= 120000000 else 200000
+        return min(c, cap)
+
+    kc = 0 if kids <= 0 else 250000 if kids == 1 else 550000 if kids == 2 else 550000 + (kids - 2) * 400000
+    prate = .15 if gross <= 55000000 else .12
+    pb = min(pension, 6000000)
+    pa = pb + min(irp, max(0, 9000000 - pb))
+    ins = min(insurance, 1000000) * .12
+    med = min(max(0, medical - gross * .03), 7000000 * max(1, deps - 1)) * .15
+    don = min(donation, 10000000) * .15 + max(0, donation - 10000000) * .30
+    special = ins + med + don
+    rentcr = 0
+    if gross <= 80000000 and rent > 0:
+        rentcr = min(rent, 10000000) * (.17 if gross <= 55000000 else .15)
+    if special + rentcr < 130000:
+        special = 130000
+        rentcr = 0
+    mar = 500000 if marriage else 0
+    credit = min(work_credit(tax, gross) + kc + pa * prate + special + rentcr + mar, tax)
+    final = max(0, tax - credit)
+    estbase = int(max(0, inc - 1500000 * deps - np_ - hicare - 130000) // 1000 * 1000)
+    est_tax = prog(estbase)
+    prepaid = max(0, est_tax - work_credit(est_tax, gross))
+    return {"card": cardded, "limit": limit, "base": base, "tax": tax, "credit": credit,
+            "final": final, "prepaid": prepaid, "refund": prepaid - final, "pen": pa * prate,
+            "rent": rentcr, "kid": kc}
+
+
 def main():
     t = threading.Thread(target=serve, daemon=True)
     t.start()
@@ -123,7 +202,8 @@ def main():
     pages = ["index.html", "privacy.html"] + [s + ".html" for s in [
         "tools/loan-interest", "tools/dsr-calculator", "tools/property-tax-fee",
         "tools/rent-vs-jeonse", "tools/savings-calculator", "tools/salary-calculator",
-        "tools/severance-calculator", "tools/subscription-score", "tools/capital-gains-tax"]]
+        "tools/severance-calculator", "tools/subscription-score", "tools/capital-gains-tax",
+        "tools/year-end-tax-calculator"]]
 
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
@@ -147,12 +227,16 @@ def main():
                 'script[src*="adsbygoogle.js"]', "els => els.map(e => e.getAttribute('src'))")
             check(any("ca-pub-6285965398350241" in (a or "") for a in ads),
                   f"{path}: 애드센스 스크립트", ads)
+            gtag = page.eval_on_selector_all(
+                'script[src*="googletagmanager.com/gtag/js"]', "els => els.map(e => e.getAttribute('src'))")
+            check(any("G-T4MEBSL2R8" in (a or "") for a in gtag), f"{path}: GA4 태그", gtag)
+            check(page.evaluate("typeof window.gtag === 'function'"), f"{path}: gtag 함수 정의", "")
             check(page.locator('meta[property="og:title"]').count() == 1, f"{path}: og:title", "")
             navs = page.locator("header nav.tool-nav a")
             if path != "privacy.html":
-                check(navs.count() == 10, f"{path}: 상단 10개 내비", navs.count())
+                check(navs.count() == 11, f"{path}: 상단 11개 내비", navs.count())
             foot = page.locator("footer .footer-links a")
-            check(foot.count() == 10, f"{path}: 하단 10개 내비", foot.count())
+            check(foot.count() == 11, f"{path}: 하단 11개 내비", foot.count())
             # no horizontal overflow at desktop
             ow = page.evaluate("document.documentElement.scrollWidth - window.innerWidth")
             check(ow <= 2, f"{path}: 가로 넘침 없음(desktop)", ow)
@@ -177,14 +261,15 @@ def main():
                     if r.status != 200:
                         bad.append((h, r.status))
             check(not bad, f"{path}: 내비·관련 링크 전부 200", bad)
-            check(len(set(hrefs)) == 10, f"{path}: 10개 도구 링크 모두 존재", len(set(hrefs)))
+            check(len(set(hrefs)) == 11, f"{path}: 11개 도구 링크 모두 존재", len(set(hrefs)))
 
         # ---- portal cards point to the 10 tools
         page.goto(base + "index.html", wait_until="load")
         cards = page.eval_on_selector_all("a.tool-card", "els => els.map(e => e.getAttribute('href'))")
-        check(len(cards) == 10, "index: 도구 카드 10개", len(cards))
+        check(len(cards) == 11, "index: 도구 카드 11개", len(cards))
         check(cards[0].startswith("https://dscookie-0422.github.io/web-ad/"), "index: 1번 기존 툴 연결", cards[0])
-        check(all(c.startswith("tools/") for c in cards[1:]), "index: 2~10번 tools/ 링크", cards[1:])
+        check(all(c.startswith("tools/") for c in cards[1:]), "index: 2~11번 tools/ 링크", cards[1:])
+        check(cards[-1] == "tools/year-end-tax-calculator.html", "index: 11번 연말정산 카드", cards[-1])
 
         # ---- portal screenshot
         os.makedirs(SHOTS, exist_ok=True)
@@ -403,10 +488,100 @@ def main():
         check("70%" in page.locator("#r-rate-label").inner_text(), "양도세: 보유 1년 미만 70%", page.locator("#r-rate-label").inner_text())
         check(not errors, "양도세: 콘솔 에러 0건", errors)
 
+        # ---- year-end tax refund
+        errors.clear()
+        page.goto(base + "tools/year-end-tax-calculator.html", wait_until="load")
+        e = exp_yet(55000000)
+        check(abs(digits(page.locator("#r-main").inner_text()) - e["refund"]) < 3,
+              "연말정산: 기본값 환급액", (page.locator("#r-main").inner_text(), round(e["refund"])))
+        check("환급" in page.locator("#r-main-label").inner_text(), "연말정산: 기본 라벨=환급", page.locator("#r-main-label").inner_text())
+        check(abs(digits(page.locator("#r-base").inner_text()) - e["base"]) < 3,
+              "연말정산: 과세표준", (page.locator("#r-base").inner_text(), e["base"]))
+        check(abs(digits(page.locator("#r-final").inner_text()) - e["final"]) < 3,
+              "연말정산: 결정세액", (page.locator("#r-final").inner_text(), round(e["final"])))
+        check(abs(digits(page.locator("#r-card").inner_text()) - e["card"]) < 3,
+              "연말정산: 카드 소득공제", (page.locator("#r-card").inner_text(), round(e["card"])))
+        check("/ 350만" in page.locator("#r-card-use").inner_text(),
+              "연말정산: 카드 한도 표시(자녀 가산 350만)", page.locator("#r-card-use").inner_text())
+        check("자동 적용" in page.locator("#r-c-std").inner_text(), "연말정산: 표준세액공제 자동", page.locator("#r-c-std").inner_text())
+        # 시나리오 카드와 표
+        check(page.locator("#sim-body tr").count() == 5, "연말정산: 시뮬레이션 5행", page.locator("#sim-body tr").count())
+        check("+" in page.locator("#sim-delta").inner_text() or "−" in page.locator("#sim-delta").inner_text(),
+              "연말정산: 비교 카드 증감 표시", page.locator("#sim-delta").inner_text())
+        rows = page.eval_on_selector_all("#sim-body tr", "els => els.map(e => e.innerText)")
+        check(all("한도 소진" in r or "+" in r for r in rows), "연말정산: 시뮬레이션 금액 표기", rows)
+
+        # 총급여 7,000만 → 카드 한도 300+50=350, 공제율 12%/15%
+        page.fill("#gross", "7000")
+        page.wait_for_timeout(250)
+        e7 = exp_yet(70000000)
+        check(abs(digits(page.locator("#r-main").inner_text()) - e7["refund"]) < 3,
+              "연말정산: 총급여 7,000만 환급", (page.locator("#r-main").inner_text(), round(e7["refund"])))
+
+        # 총급여 9,000만 + 월세 1,000 → 월세 세액공제 대상 아님
+        page.fill("#gross", "9000")
+        page.fill("#rent", "1000")
+        page.wait_for_timeout(300)
+        check("0원" in page.locator("#r-c-rent").inner_text(), "연말정산: 8천만 초과 월세공제 0", page.locator("#r-c-rent").inner_text())
+        check("월세 세액공제 대상이 아닙니다" in page.locator("#yt-note").inner_text(), "연말정산: 월세 제외 안내", page.locator("#yt-note").inner_text()[:80])
+
+        # 총급여 5,000만 + 월세 1,200 → 한도 1,000만 × 17% = 170만
+        page.fill("#gross", "5000")
+        page.wait_for_timeout(300)
+        check("170만" in page.locator("#r-c-rent").inner_text() or "1,700,000" in page.locator("#r-c-rent").inner_text(),
+              "연말정산: 월세 1,200만 → 170만", page.locator("#r-c-rent").inner_text())
+
+        # 연금저축 900만 → 135만 (15%)
+        page.fill("#rent", "0")
+        page.fill("#pension", "900")
+        page.wait_for_timeout(300)
+        check("1,350,000" in page.locator("#r-c-pen").inner_text(), "연말정산: 연금 900만 → 135만 공제", page.locator("#r-c-pen").inner_text())
+        check("900 / 900만" in page.locator("#r-pen-use").inner_text(), "연말정산: 연금 한도 바", page.locator("#r-pen-use").inner_text())
+        rows2 = page.eval_on_selector_all("#sim-body tr", "els => els.map(e => e.innerText)")
+        check(all("한도 소진" in r for r in rows2 if "연금" in r), "연말정산: 연금 한도 소진 표시", rows2)
+
+        # 카드 문턱 미달 → 공제 0
+        page.fill("#pension", "0")
+        page.fill("#cc", "500")
+        page.fill("#chk", "200")
+        page.wait_for_timeout(300)
+        check(digits(page.locator("#r-card").inner_text()) == 0, "연말정산: 25% 문턱 미달 카드공제 0", page.locator("#r-card").inner_text())
+        check("25%" in page.locator("#yt-note").inner_text(), "연말정산: 문턱 안내", page.locator("#yt-note").inner_text()[:90])
+
+        # 결정세액 0 → 더 넣어도 환급 불변 안내
+        page.fill("#gross", "2800")
+        page.fill("#deps", "1")
+        page.fill("#kids", "0")
+        page.fill("#pension", "900")
+        page.wait_for_timeout(300)
+        check(digits(page.locator("#r-final").inner_text()) == 0, "연말정산: 저소득 결정세액 0", page.locator("#r-final").inner_text())
+        check("결정세액이 0원" in page.locator("#yt-note").inner_text(), "연말정산: 결정세액 0 안내", page.locator("#yt-note").inner_text()[:90])
+
+        # 자녀 0 → 자녀세액공제 0
+        page.fill("#gross", "5500")
+        page.fill("#deps", "2")
+        page.fill("#pension", "200")
+        page.fill("#cc", "1800")
+        page.fill("#chk", "600")
+        page.wait_for_timeout(300)
+        check("250,000" in page.locator("#r-c-kid").inner_text(), "연말정산: 자녀 1명 25만", page.locator("#r-c-kid").inner_text())
+        page.fill("#kids", "3")
+        page.wait_for_timeout(300)
+        check("950,000" in page.locator("#r-c-kid").inner_text(), "연말정산: 자녀 3명 95만", page.locator("#r-c-kid").inner_text())
+        page.fill("#kids", "0")
+        page.wait_for_timeout(300)
+        check(digits(page.locator("#r-c-kid").inner_text()) == 0, "연말정산: 자녀 0명 0원", page.locator("#r-c-kid").inner_text())
+        # 기납부세액 직접 입력 반영
+        page.fill("#prepaid", "300")
+        page.wait_for_timeout(300)
+        check(digits(page.locator("#r-prepaid").inner_text()) == 3000000, "연말정산: 기납부세액 직접 입력", page.locator("#r-prepaid").inner_text())
+        check(not errors, "연말정산: 콘솔 에러 0건", errors)
+
         # ---- mobile pass on one heavy tool page
         errors.clear()
         page.set_viewport_size({"width": 390, "height": 844})
-        for path in ["tools/loan-interest.html", "tools/salary-calculator.html", "tools/capital-gains-tax.html"]:
+        for path in ["tools/loan-interest.html", "tools/salary-calculator.html", "tools/capital-gains-tax.html",
+                     "tools/year-end-tax-calculator.html"]:
             page.goto(base + path, wait_until="load")
             page.wait_for_timeout(300)
             ow = page.evaluate("document.documentElement.scrollWidth - window.innerWidth")

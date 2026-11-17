@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Builder for the 10-tool finance portal at dscookie-0422.github.io."""
+"""Builder for the 11-tool finance portal at dscookie-0422.github.io."""
 import json
 import os
 import re
@@ -9,9 +9,17 @@ BASE = "https://dscookie-0422.github.io"
 SITE = "생활 금융 계산기"
 ADSENSE = ('<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
            '?client=ca-pub-6285965398350241" crossorigin="anonymous"></script>')
+GA4 = """<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T4MEBSL2R8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T4MEBSL2R8');
+</script>"""
 NAVER = "0c094f9c82a10c5fcd5292b5a2744684c0ecfee2"
 GOOGLE = "ROz-ZBABKqWs14o1I1dBc0h49IidcUGDRy0BjunFj2M"
-LASTMOD = "2026-11-15"
+LASTMOD = "2026-11-17"
 
 # slug, short nav name, full title, one-line description, emoji
 TOOLS = [
@@ -35,6 +43,8 @@ TOOLS = [
      "무주택기간·부양가족·통장 가입기간으로 84점 만점 청약 가점을 계산합니다.", "🎯"),
     ("tools/capital-gains-tax", "양도세", "양도소득세 간이 계산기",
      "취득가·양도가·보유기간으로 1세대1주택 장기보유특별공제를 반영해 추정합니다.", "🏷️"),
+    ("tools/year-end-tax-calculator", "연말정산 환급", "2026 연말정산 환급금·세액공제 모의계산기",
+     "총급여와 카드·연금저축·월세로 예상 환급금을 계산하고, 11~12월에 더 채우면 얼마가 늘어나는지 비교합니다.", "🧮"),
 ]
 TOOL_BY_SLUG = {t[0]: t for t in TOOLS}
 
@@ -327,6 +337,7 @@ def head(title, desc, keywords, url, faqs, app_name, app_desc, prefix):
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f2447'/%3E%3Cpath d='M18 40l10-10 6 6 12-14' stroke='%237ce0bb' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="{prefix}assets/site.css">
 {ADSENSE}
+{GA4}
 <script type="application/ld+json">
 {json.dumps(app_ld, ensure_ascii=False, indent=2)}
 </script>
@@ -352,7 +363,7 @@ def header(prefix, current_slug, from_tools=False):
       </span>
       <span>{SITE}</span>
     </a>
-    <nav class="tool-nav" aria-label="무료 계산기 10종">
+    <nav class="tool-nav" aria-label="무료 계산기 11종">
       {nav}
     </nav>
   </div>
@@ -368,10 +379,10 @@ def footer(prefix, from_tools=False):
     <div class="footer-grid">
       <div>
         <span class="brand-foot">{SITE}</span>
-        <p>회원가입도, 앱 설치도 없이 브라우저에서 바로 쓰는 무료 생활 금융 계산기 10종입니다. 입력한 값은 서버로 전송되지 않습니다.</p>
+        <p>회원가입도, 앱 설치도 없이 브라우저에서 바로 쓰는 무료 생활 금융 계산기 11종입니다. 입력한 값은 서버로 전송되지 않습니다.</p>
       </div>
       <div>
-        <h2>계산기 10종</h2>
+        <h2>계산기 11종</h2>
         <div class="footer-links">
         {links}
         </div>
@@ -483,7 +494,7 @@ def build_index():
 
     faqs = [
         ("이 계산기들은 무료인가요? 회원가입이 필요한가요?",
-         "10종 모두 무료이고 회원가입이나 앱 설치가 필요 없습니다. 브라우저 주소만 열면 바로 계산할 수 있고, 계산 횟수 제한도 없습니다."),
+         "11종 모두 무료이고 회원가입이나 앱 설치가 필요 없습니다. 브라우저 주소만 열면 바로 계산할 수 있고, 계산 횟수 제한도 없습니다."),
         ("입력한 금액이 서버에 저장되나요?",
          "아니요. 모든 계산은 이용자의 브라우저 안에서 자바스크립트로만 처리됩니다. 대출 금액, 연봉, 매매가 같은 입력값은 서버로 전송되지 않고 어디에도 저장되지 않으며, 창을 닫으면 사라집니다."),
         ("계산 결과를 그대로 믿어도 되나요?",
@@ -492,23 +503,23 @@ def build_index():
          "집을 사거나 옮길 계획이면 대출 갈아타기 → 주담대 이자 → DSR 한도 → 취득세·복비 순서로 보면 전체 비용이 한 번에 정리됩니다. 전세와 월세를 저울질할 때는 월세 vs 전세 비교를, 소득·퇴직·청약이 궁금할 때는 연봉 실수령·퇴직금·청약 가점 계산기를 쓰면 됩니다."),
     ]
     desc = ("주담대 이자, DSR 한도, 취득세·복비, 월세 vs 전세, 예적금 실수령액, 연봉 실수령액, 퇴직금·실업급여, "
-            "청약 가점, 양도소득세까지 — 회원가입 없이 바로 쓰는 무료 생활 금융 계산기 10종 모음입니다.")
-    out = [head("생활 금융 계산기 10종 | 대출·세금·연봉·청약 무료 계산",
+            "청약 가점, 양도소득세, 연말정산 환급금까지 — 회원가입 없이 바로 쓰는 무료 생활 금융 계산기 11종 모음입니다.")
+    out = [head("생활 금융 계산기 11종 | 대출·세금·연말정산·연봉·청약 무료 계산",
                 desc,
-                "금융 계산기, 대출 이자 계산기, DSR 계산기, 취득세 계산기, 중개보수 계산기, 월세 전세 비교, 적금 이자 계산기, 연봉 실수령액, 퇴직금 계산기, 실업급여 계산기, 청약 가점 계산기, 양도소득세 계산기",
-                f"{BASE}/", faqs, "생활 금융 계산기 10종", desc, "")]
+                "금융 계산기, 대출 이자 계산기, DSR 계산기, 취득세 계산기, 중개보수 계산기, 월세 전세 비교, 적금 이자 계산기, 연봉 실수령액, 퇴직금 계산기, 실업급여 계산기, 청약 가점 계산기, 양도소득세 계산기, 연말정산 환급금 계산기, 2026 연말정산",
+                f"{BASE}/", faqs, "생활 금융 계산기 11종", desc, "")]
     out.append(header("", ""))
     out.append(f"""<main>
   <div class="wrap">
     <section class="hero">
       <span class="kicker">무료 · 회원가입 없음 · 입력값 서버 전송 없음</span>
-      <h1>돈이 걸린 계산,<br>10가지 도구로 한 번에 정리하세요</h1>
-      <p>대출을 갈아탈지, 집을 살지, 전세로 갈지, 연봉에서 얼마가 빠지는지 — 생활에서 실제로 돈이 오가는 계산만 모았습니다. 브라우저에서 바로 계산되고, 입력한 값은 어디에도 저장되지 않습니다.</p>
-      <div class="stats"><span>계산기 10종</span><span>공식·요율 근거 공개</span><span>모바일 최적화</span><span>100% 무료</span></div>
+      <h1>돈이 걸린 계산,<br>11가지 도구로 한 번에 정리하세요</h1>
+      <p>대출을 갈아탈지, 집을 살지, 전세로 갈지, 연봉에서 얼마가 빠지고 연말정산으로 얼마를 돌려받는지 — 생활에서 실제로 돈이 오가는 계산만 모았습니다. 브라우저에서 바로 계산되고, 입력한 값은 어디에도 저장되지 않습니다.</p>
+      <div class="stats"><span>계산기 11종</span><span>공식·요율 근거 공개</span><span>모바일 최적화</span><span>100% 무료</span></div>
     </section>
 
     <div class="section-title">
-      <h2>계산기 10종</h2>
+      <h2>계산기 11종</h2>
       <span>필요한 도구를 눌러 바로 시작하세요</span>
     </div>
     <section class="tool-cards">
@@ -526,6 +537,7 @@ def build_index():
         <li><strong>이사를 앞두고</strong> — 월세 vs 전세 비교 계산기로 2년 동안의 총비용을 비교하고, 대출 갈아타기 계산기로 기존 대출을 옮기는 게 나은지 봅니다.</li>
         <li><strong>월급과 노후</strong> — 연봉 실수령액 계산기로 통장에 들어오는 금액을 확인하고, 적금·예금 계산기로 만기 실수령액을, 퇴직금·실업급여 계산기로 회사를 나올 때의 현금 흐름을 가늠합니다.</li>
         <li><strong>내 집 마련 준비</strong> — 청약 가점 계산기로 현재 점수와 부족한 항목을 확인하고, 집을 팔 계획이 있다면 양도소득세 간이 계산기로 세금 규모를 미리 봅니다.</li>
+        <li><strong>연말이 다가올 때</strong> — 연말정산 환급금 모의계산기로 지금까지의 카드·연금저축·월세 납입으로 예상 환급액을 확인하고, 12월 31일 전에 무엇을 더 채워야 유리한지 비교합니다.</li>
       </ul>
 
       <h2>결과를 읽는 방법</h2>
@@ -533,7 +545,7 @@ def build_index():
       <p>요율은 2026년 11월 기준으로 확인한 값을 기본값으로 넣었습니다. 제도가 바뀌면 페이지의 기준일 표시와 함께 갱신하며, 직접 요율을 입력할 수 있는 항목은 입력칸으로 열어 두었습니다.</p>
 
       <h2>개인정보와 광고</h2>
-      <p>계산에 쓰는 값은 브라우저 메모리에서만 처리되고 전송·저장되지 않습니다. 사이트 운영을 위해 Google AdSense 광고가 표시될 수 있으며, 광고 쿠키 사용 여부는 브라우저 설정에서 끌 수 있습니다. 자세한 내용은 <a href="privacy.html">개인정보처리방침</a>에 적어 두었습니다.</p>
+      <p>계산에 쓰는 값은 브라우저 메모리에서만 처리되고 전송·저장되지 않습니다. 방문 통계는 Google Analytics로 집계하며, 사이트 운영을 위해 Google AdSense 광고가 표시될 수 있습니다. 광고·통계 쿠키 사용 여부는 브라우저 설정에서 끌 수 있고, 자세한 내용은 <a href="privacy.html">개인정보처리방침</a>에 적어 두었습니다.</p>
     </section>
 
     <section class="faq">
@@ -555,7 +567,7 @@ def build_index():
 def build_privacy():
     faqs = [("계산기에 입력한 값이 저장되나요?",
              "저장되지 않습니다. 모든 계산은 브라우저 안에서만 이루어지고 서버로 전송되는 값은 없습니다.")]
-    desc = "생활 금융 계산기 10종의 개인정보처리방침입니다. 계산기 입력값은 브라우저에서만 처리되고 서버로 전송되지 않습니다."
+    desc = "생활 금융 계산기 11종의 개인정보처리방침입니다. 계산기 입력값은 브라우저에서만 처리되고 서버로 전송되지 않습니다."
     out = [head("개인정보처리방침 | 생활 금융 계산기", desc,
                 "개인정보처리방침, 쿠키, 광고, 계산기 개인정보",
                 f"{BASE}/privacy.html", faqs, "개인정보처리방침", desc, "")]
@@ -571,7 +583,7 @@ def build_privacy():
         {tool_links}
       </nav>
 
-      <p>생활 금융 계산기(이하 &ldquo;사이트&rdquo;)는 이용자의 개인정보를 소중히 다루고, 「개인정보 보호법」 등 관련 법령을 지킵니다. 이 방침은 사이트가 어떤 정보를 다루고, 무엇을 하지 않는지 알려 드리기 위해 작성했습니다. 사이트에서 제공하는 10종의 계산기 모두에 동일하게 적용됩니다.</p>
+      <p>생활 금융 계산기(이하 &ldquo;사이트&rdquo;)는 이용자의 개인정보를 소중히 다루고, 「개인정보 보호법」 등 관련 법령을 지킵니다. 이 방침은 사이트가 어떤 정보를 다루고, 무엇을 하지 않는지 알려 드리기 위해 작성했습니다. 사이트에서 제공하는 11종의 계산기 모두에 동일하게 적용됩니다.</p>
 
       <h2>1. 계산기 입력값은 서버로 전송되지 않습니다</h2>
       <p>사이트의 계산기는 대출 원금, 금리, 연봉, 매매가, 보유 주택 수 같은 숫자를 이용자의 브라우저(기기) 안에서만 계산합니다. 이 값들은 <strong>서버로 전송되지 않고, 어디에도 저장되지 않으며, 회원가입이나 로그인이 필요하지 않습니다.</strong> 브라우저를 닫으면 입력값은 남지 않습니다.</p>
@@ -581,10 +593,12 @@ def build_privacy():
 
       <h2>3. 자동으로 수집될 수 있는 정보</h2>
       <p>사이트를 제공하는 호스팅 사업자(GitHub Pages)는 서비스 운영과 보안을 위해 접속 IP 주소, 브라우저 종류와 버전, 접속 일시, 방문한 페이지 같은 접속 기록을 자동으로 남길 수 있습니다. 이 정보는 통계와 장애 대응 목적으로만 쓰이고, 개인을 식별하는 데 사용하지 않습니다.</p>
+      <p>사이트는 방문 통계를 확인하기 위해 <strong>Google Analytics 4</strong>를 사용합니다. 이 도구는 쿠키(<code>_ga</code> 등)를 이용해 방문한 페이지, 유입 경로, 대략적인 지역·기기·브라우저 정보 같은 통계를 수집합니다. 계산기에 입력한 숫자는 이 통계에도 전송되지 않습니다. 수집된 통계는 어떤 계산기가 얼마나 쓰이는지 확인해 사이트를 고치는 목적으로만 쓰입니다.</p>
 
       <h2>4. 쿠키와 광고</h2>
-      <p>사이트는 계산 기능을 위해 쿠키를 사용하지 않습니다. 다만 사이트에는 Google AdSense 광고가 게재되며, 이 경우 아래 내용이 적용됩니다.</p>
+      <p>사이트는 계산 기능을 위해 쿠키를 사용하지 않습니다. 방문 통계를 위한 Google Analytics 쿠키는 사용하며, 사이트에는 Google AdSense 광고가 게재되어 아래 내용이 적용됩니다.</p>
       <ul>
+        <li>방문 통계를 원하지 않으면 <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics 차단 브라우저 부가기능</a>을 설치하거나 브라우저에서 쿠키 저장을 막을 수 있습니다.</li>
         <li>Google을 포함한 제3자 판매자는 쿠키를 사용해 이용자가 이전에 방문한 사이트를 기준으로 광고를 게재할 수 있습니다.</li>
         <li>Google이 광고 쿠키를 사용함으로써 Google과 파트너는 이용자의 사이트 방문 기록을 바탕으로 광고를 제공할 수 있습니다.</li>
         <li>이용자는 <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google 광고 설정</a>에서 맞춤 광고를 해제할 수 있습니다.</li>
@@ -593,10 +607,10 @@ def build_privacy():
       </ul>
 
       <h2>5. 개인정보의 제3자 제공 및 처리 위탁</h2>
-      <p>사이트는 이용자의 개인정보를 수집하지 않으므로 제3자에게 제공하거나 처리를 위탁하지 않습니다. 광고를 게재하는 경우 광고 사업자의 쿠키 사용은 위 4항에 따릅니다.</p>
+      <p>사이트는 이용자의 개인정보를 직접 수집하지 않으므로 제3자에게 제공하거나 처리를 위탁하지 않습니다. 방문 통계는 Google Analytics를 통해 Google이 처리하며, 광고를 게재하는 경우 광고 사업자의 쿠키 사용도 위 4항을 따릅니다.</p>
 
       <h2>6. 보관 기간</h2>
-      <p>사이트가 직접 보관하는 개인정보는 없습니다. 호스팅 사업자가 남기는 접속 기록의 보관 기간은 해당 사업자의 정책을 따릅니다.</p>
+      <p>사이트가 직접 보관하는 개인정보는 없습니다. 호스팅 사업자가 남기는 접속 기록과 Google Analytics 방문 통계의 보관 기간은 각 사업자(도구)의 정책과 설정을 따릅니다.</p>
 
       <h2>7. 이용자의 권리</h2>
       <p>이용자는 언제든지 광고 쿠키 사용을 거부하거나 브라우저 설정을 변경할 수 있습니다. 사이트가 보관하는 개인정보가 없으므로 열람·정정·삭제를 요청할 대상 정보는 없습니다.</p>

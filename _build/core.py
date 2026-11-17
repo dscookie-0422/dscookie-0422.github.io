@@ -23,7 +23,7 @@ LASTMOD = "2026-11-17"
 
 # slug, short nav name, full title, one-line description, emoji
 TOOLS = [
-    ("web-ad", "대출 갈아타기", "대출 갈아타기 손익 계산기",
+    ("web-ad", "갈아타기", "대출 갈아타기 손익 계산기",
      "중도상환수수료·부대비용·LTV까지 넣고 갈아타면 본전 찾는 개월 수를 계산합니다.", "🔄"),
     ("tools/loan-interest", "주담대 이자", "주택담보·전세대출 월 이자 계산기",
      "원리금균등·원금균등·만기일시·체증식 상환방식을 비교하고 연도별 상환표를 봅니다.", "🏠"),
@@ -37,13 +37,13 @@ TOOLS = [
      "단리·복리, 일반과세·세금우대·비과세를 반영한 만기 실수령액을 계산합니다.", "💰"),
     ("tools/salary-calculator", "연봉 실수령", "연봉 실수령액·4대보험 계산기",
      "4대보험과 근로소득세를 반영한 월 실수령액과 공제 내역을 보여 줍니다.", "💵"),
-    ("tools/severance-calculator", "퇴직금·실업급여", "퇴직금·실업급여 예상액 계산기",
+    ("tools/severance-calculator", "퇴직금", "퇴직금·실업급여 예상액 계산기",
      "평균임금으로 퇴직금을 계산하고 구직급여 예상 수급액까지 함께 봅니다.", "📦"),
     ("tools/subscription-score", "청약 가점", "청약 가점 계산기",
      "무주택기간·부양가족·통장 가입기간으로 84점 만점 청약 가점을 계산합니다.", "🎯"),
     ("tools/capital-gains-tax", "양도세", "양도소득세 간이 계산기",
      "취득가·양도가·보유기간으로 1세대1주택 장기보유특별공제를 반영해 추정합니다.", "🏷️"),
-    ("tools/year-end-tax-calculator", "연말정산 환급", "2026 연말정산 환급금·세액공제 모의계산기",
+    ("tools/year-end-tax-calculator", "연말정산", "2026 연말정산 환급금·세액공제 모의계산기",
      "총급여와 카드·연금저축·월세로 예상 환급금을 계산하고, 11~12월에 더 채우면 얼마가 늘어나는지 비교합니다.", "🧮"),
 ]
 TOOL_BY_SLUG = {t[0]: t for t in TOOLS}
@@ -85,7 +85,7 @@ a:hover{text-decoration:underline}
 .brand-mark{display:grid; place-items:center; width:30px; height:30px; border-radius:9px; background:var(--navy); color:#7ce0bb; flex:none}
 .tool-nav{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; margin-left:auto; padding:8px 0; min-width:0; flex:1 1 auto}
 .tool-nav::-webkit-scrollbar{display:none}
-.tool-nav a{flex:none; font-size:13.5px; font-weight:600; color:#4e5968; padding:7px 11px; border-radius:999px; white-space:nowrap; border:1px solid transparent}
+.tool-nav a{flex:none; font-size:13.5px; font-weight:600; color:#4e5968; padding:7px 9px; border-radius:999px; white-space:nowrap; border:1px solid transparent}
 .tool-nav a:hover{background:var(--sky); text-decoration:none}
 .tool-nav a.on{background:var(--navy); color:#fff}
 

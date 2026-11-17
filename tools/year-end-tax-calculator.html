@@ -266,7 +266,7 @@
   <dt><strong>세액공제 합계</strong></dt><dd><strong class="good" id="r-credit">-</strong></dd>
   <dt><strong>결정세액</strong></dt><dd><strong class="em" id="r-final">-</strong></dd>
   <dt>기납부세액 (원천징수)</dt><dd id="r-prepaid">-</dd>
-  <dt>지방소득세 포함</dt><dd id="r-with-local">-</dd>
+  <dt>환급액 (지방소득세 포함)</dt><dd id="r-with-local">-</dd>
 </dl>
 <div class="bar-rows" style="margin-top:14px">
   <div class="bar-row"><span class="bar-k">카드한도</span><div class="bar-track"><span class="bar-fill fill-j" id="bar-card"></span></div><span class="bar-v" id="r-card-use">-</span></div>
@@ -303,7 +303,7 @@
   </table>
 </div>
 <p class="mini" id="sim-note"></p>
-<p class="mini" style="margin-top:10px">기납부세액은 간이세액표 방식으로 추정하며, 부양가족 수는 연초부터 회사에 신고되어 매달 원천징수에 반영된 것으로 가정합니다. 회사가 실제로 뗀 세금과 다르면 기납부세액을 직접 입력하세요. 교육비·기부금 일부와 주택청약저축 같은 항목은 반영하지 않았습니다.)</p>
+<p class="mini" style="margin-top:10px">기납부세액은 간이세액표 방식으로 추정하며, 부양가족 수는 연초부터 회사에 신고되어 매달 원천징수에 반영된 것으로 가정합니다. 회사가 실제로 뗀 세금과 다르면 기납부세액을 직접 입력하세요. 교육비·기부금 일부와 주택청약저축 같은 항목은 반영하지 않았습니다.</p>
 
       </div>
     </section>
@@ -623,14 +623,16 @@ function addCard(i, amt){
   i2.chk += amt;
   return i2;
 }
-function cardRoom(i){                 // 공제가 더 늘어나는 체크카드 추가 한도(원)
-  var base = calcYT(i).card.ded;
+function cardRoom(i){                 // 공제가 한도까지 차는 데 필요한 체크카드 추가 사용액(원)
+  var baseDed = calcYT(i).card.ded;
+  var maxDed = calcYT(addCard(i, 40000000)).card.ded;
+  if(maxDed <= baseDed + 1) return 0;
   var lo = 0, hi = 40000000;
-  for(var k=0;k<36;k++){
+  for(var k=0;k<40;k++){
     var mid = (lo+hi)/2;
-    if(calcYT(addCard(i, mid)).card.ded > base + 1) lo = mid; else hi = mid;
+    if(calcYT(addCard(i, mid)).card.ded < maxDed - 1) lo = mid; else hi = mid;
   }
-  return Math.floor(lo/10000)*10000;
+  return Math.ceil(hi/10000)*10000;
 }
 function deltaRefund(i, i2){
   return calcYT(i2).refund - calcYT(i).refund;
@@ -674,7 +676,7 @@ function calcYearEnd(){
   setText('r-credit', '−' + won(r.credit));
   setText('r-final', won(r.final));
   setText('r-prepaid', won(r.prepaid));
-  setText('r-with-local', wonsign(refund*1.1) + ' (지방소득세 포함)');
+  setText('r-with-local', wonsign(refund*1.1));
 
   setText('r-c-work', '−' + won(r.workCredit));
   setText('r-c-kid', '−' + won(r.kidCredit));

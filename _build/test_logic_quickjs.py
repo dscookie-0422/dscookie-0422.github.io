@@ -152,6 +152,14 @@ def main():
         extra.append(("시뮬레이션 증감", out["simDelta"]))
     if "350만" not in out["cardUse"]:
         extra.append(("카드 한도 표시", out["cardUse"]))
+    # 카드 한도까지 채우는 추가 사용액이 한도 잔여분/0.3 수준인지(과대값 방지)
+    remain = 3_500_000 - 2_437_500
+    room_man = int((remain / 0.30) // 10000) + 1
+    m = re.search(r"체크카드 한도까지</td><td>\+(\d+)만", out["simRows"])
+    if not m:
+        extra.append(("카드 한도 행", out["simRows"][:200]))
+    elif abs(int(m.group(1)) - room_man) > 2:
+        extra.append(("카드 한도 행 금액", int(m.group(1)), room_man))
     if extra:
         fails.append(("표시값", extra))
 

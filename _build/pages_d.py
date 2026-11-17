@@ -162,6 +162,7 @@ function readYT(){
   };
 }
 function wonsign(x){ return (x>0?'+':(x<0?'−':'')) + won(Math.abs(x)); }
+function wonNeg(x){ return x>0 ? '−' + won(x) : '0원'; }
 
 function calcYearEnd(){
   var i = readYT();
@@ -175,28 +176,30 @@ function calcYearEnd(){
           (r.prepaidAuto ? ' (자동 추정)' : ' (직접 입력)'));
 
   setText('r-gross', won(r.gross));
-  setText('r-earned', '−' + won(r.earned));
+  setText('r-earned', wonNeg(r.earned));
   setText('r-income', won(r.income));
-  setText('r-personal', '−' + won(r.personal));
-  setText('r-np', '−' + won(r.np));
-  setText('r-hicare', '−' + won(r.hicare));
-  setText('r-card', '−' + won(r.card.ded));
-  setText('r-house', '−' + won(r.house));
+  setText('r-personal', wonNeg(r.personal));
+  setText('r-np', wonNeg(r.np));
+  setText('r-hicare', wonNeg(r.hicare));
+  setText('r-card', wonNeg(r.card.ded));
+  setText('r-house', wonNeg(r.house));
   setText('r-base', won(r.base));
   setText('r-tax', won(r.tax));
-  setText('r-credit', '−' + won(r.credit));
+  setText('r-credit', wonNeg(r.credit));
   setText('r-final', won(r.final));
   setText('r-prepaid', won(r.prepaid));
   setText('r-with-local', wonsign(refund*1.1));
 
-  setText('r-c-work', '−' + won(r.workCredit));
-  setText('r-c-kid', '−' + won(r.kidCredit));
-  setText('r-c-pen', '−' + won(r.penCredit) + ' (' + pct(r.penRate*100,1) + '% · ' + num(Math.round(r.penAmt/10000)) + '만원 납입)');
-  setText('r-c-ins', '−' + won(r.insCredit));
-  setText('r-c-med', '−' + won(r.medCredit));
-  setText('r-c-don', '−' + won(r.donCredit));
-  setText('r-c-rent', r.rentCredit>0 ? '−' + won(r.rentCredit) + ' (' + pct(r.rentBase/10000,0) + '만원)' : '−0원');
-  setText('r-c-marry', '−' + won(r.marriage));
+  setText('r-c-work', wonNeg(r.workCredit));
+  setText('r-c-kid', wonNeg(r.kidCredit));
+  setText('r-c-pen', wonNeg(r.penCredit));
+  setText('r-c-pen-rate', r.penCredit>0 ? '(' + pct(r.penRate*100,1) + '% · ' + num(Math.round(r.penAmt/10000)) + '만원)' : '');
+  setText('r-c-ins', wonNeg(r.insCredit));
+  setText('r-c-med', wonNeg(r.medCredit));
+  setText('r-c-don', wonNeg(r.donCredit));
+  setText('r-c-rent', wonNeg(r.rentCredit));
+  setText('r-c-rent-base', r.rentCredit>0 ? '(' + pct(r.rentBase/10000,0) + '만원)' : '');
+  setText('r-c-marry', wonNeg(r.marriage));
   setText('r-c-std', r.std ? '−130,000원 (자동 적용)' : '해당 없음');
 
   var cardUse = r.card.limit>0 ? Math.min(100, r.card.basic/r.card.limit*100) : 0;
@@ -381,7 +384,7 @@ YET_RESULTS = r"""
 </dl>
 <div class="bar-rows" style="margin-top:14px">
   <div class="bar-row"><span class="bar-k">카드한도</span><div class="bar-track"><span class="bar-fill fill-j" id="bar-card"></span></div><span class="bar-v" id="r-card-use">-</span></div>
-  <div class="bar-row"><span class="bar-k">연금 900만</span><div class="bar-track"><span class="bar-fill fill-w" id="bar-pen"></span></div><span class="bar-v" id="r-pen-use">-</span></div>
+  <div class="bar-row"><span class="bar-k">연금계좌</span><div class="bar-track"><span class="bar-fill fill-w" id="bar-pen"></span></div><span class="bar-v" id="r-pen-use">-</span></div>
 </div>
 <div id="yt-note"></div>
 
@@ -390,11 +393,11 @@ YET_RESULTS = r"""
 <dl class="kv">
   <dt>근로소득세액공제</dt><dd id="r-c-work">-</dd>
   <dt>자녀세액공제</dt><dd id="r-c-kid">-</dd>
-  <dt>연금계좌</dt><dd id="r-c-pen">-</dd>
+  <dt>연금계좌 <span class="kv-note" id="r-c-pen-rate"></span></dt><dd id="r-c-pen">-</dd>
   <dt>보장성보험</dt><dd id="r-c-ins">-</dd>
   <dt>의료비</dt><dd id="r-c-med">-</dd>
   <dt>기부금</dt><dd id="r-c-don">-</dd>
-  <dt>월세</dt><dd id="r-c-rent">-</dd>
+  <dt>월세 <span class="kv-note" id="r-c-rent-base"></span></dt><dd id="r-c-rent">-</dd>
   <dt>결혼세액공제</dt><dd id="r-c-marry">-</dd>
   <dt>표준세액공제</dt><dd id="r-c-std">-</dd>
 </dl>

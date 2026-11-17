@@ -528,7 +528,7 @@ def main():
         # 총급여 5,000만 + 월세 1,200 → 한도 1,000만 × 17% = 170만
         page.fill("#gross", "5000")
         page.wait_for_timeout(300)
-        check("170만" in page.locator("#r-c-rent").inner_text() or "1,700,000" in page.locator("#r-c-rent").inner_text(),
+        check("1,700,000" in page.locator("#r-c-rent").inner_text() and "1000만" in page.locator("#r-c-rent-base").inner_text(),
               "연말정산: 월세 1,200만 → 170만", page.locator("#r-c-rent").inner_text())
 
         # 연금저축 900만 → 135만 (15%)

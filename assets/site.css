@@ -221,6 +221,7 @@ table.sim-tbl{min-width:0; font-size:12.5px}
 table.sim-tbl th,table.sim-tbl td{padding:8px 9px}
 table.sim-tbl td:first-child{white-space:normal; line-height:1.45}
 table.sim-tbl td:last-child{color:var(--blue-d); font-weight:700}
+.kv-note{color:#9aa7ba; font-weight:500; font-size:12px}
 @media (max-width:520px){
   .sim-card strong{font-size:14.5px}
   .sim-card span{font-size:10.5px}

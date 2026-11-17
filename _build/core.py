@@ -85,7 +85,7 @@ a:hover{text-decoration:underline}
 .brand-mark{display:grid; place-items:center; width:30px; height:30px; border-radius:9px; background:var(--navy); color:#7ce0bb; flex:none}
 .tool-nav{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; margin-left:auto; padding:8px 0; min-width:0; flex:1 1 auto}
 .tool-nav::-webkit-scrollbar{display:none}
-.tool-nav a{flex:none; font-size:13.5px; font-weight:600; color:#4e5968; padding:7px 9px; border-radius:999px; white-space:nowrap; border:1px solid transparent}
+.tool-nav a{flex:none; font-size:13.5px; font-weight:600; color:#4e5968; padding:7px 8px; border-radius:999px; white-space:nowrap; border:1px solid transparent}
 .tool-nav a:hover{background:var(--sky); text-decoration:none}
 .tool-nav a.on{background:var(--navy); color:#fff}
 

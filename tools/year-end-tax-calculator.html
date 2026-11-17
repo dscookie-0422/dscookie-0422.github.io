@@ -702,7 +702,7 @@ function calcYearEnd(){
   if(r.final <= 0) tips.push('결정세액이 0원이라 지금은 더 넣어도 환급이 늘지 않습니다.');
   if(r.card.total < r.card.floor) tips.push('카드·현금영수증 사용액이 총급여 25%(' + eok(r.card.floor) + ')에 못 미쳐 카드 공제가 0원입니다.');
   else if(r.card.basic >= r.card.limit) tips.push('카드 공제 기본한도를 모두 채웠습니다. 더 써도 소득공제는 늘지 않습니다.');
-  if(r.penAmt < 9000000) tips.push('연금계좌 한도까지 <strong>' + eok(9000000-r.penAmt) + '</strong>이 남아 있습니다 (12월 31일 입금 마감).');
+  if(r.penAmt < 9000000 && r.final > 0) tips.push('연금계좌 한도까지 <strong>' + eok(9000000-r.penAmt) + '</strong>이 남아 있습니다 (12월 31일 입금 마감).');
   if(r.gross > 80000000 && i.rent > 0) tips.push('총급여 8,000만 원을 넘어 월세 세액공제 대상이 아닙니다.');
   if(r.std) tips.push('특별세액공제·월세 합계가 13만 원보다 적어 표준세액공제 13만 원이 자동 적용되었습니다.');
   $('yt-note').innerHTML = tips.length ? '<div class="note">' + tips.join(' ') + '</div>' : '<div class="note good">공제 항목을 고르게 챙기고 있습니다.</div>';

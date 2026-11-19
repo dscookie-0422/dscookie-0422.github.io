@@ -230,3 +230,36 @@ table.sim-tbl td:last-child{color:var(--blue-d); font-weight:700}
   .bar-v{min-width:72px; font-size:11.5px}
   .bar-k{width:54px; font-size:12px}
 }
+/* 본문 표: 문장이 들어가는 칸은 줄바꿈 + 왼쪽 정렬 */
+table.tbl.txt{min-width:560px}
+table.tbl.txt th,table.tbl.txt td{white-space:normal; text-align:left}
+table.tbl.txt td{line-height:1.55; vertical-align:top}
+/* 좁은 화면에서는 문장 표를 한 줄씩 쌓아 읽기 좋게 */
+@media (max-width:600px){
+  table.tbl.txt{min-width:0; display:block}
+  table.tbl.txt thead{display:none}
+  table.tbl.txt tbody,table.tbl.txt tr,table.tbl.txt td{display:block; width:auto}
+  table.tbl.txt tr{padding:11px 13px; border-bottom:1px solid #eef1f6}
+  table.tbl.txt tr:last-child{border-bottom:0}
+  table.tbl.txt tbody tr:nth-child(even){background:#fcfdff}
+  table.tbl.txt td{border:0; padding:0 0 3px; font-size:13px}
+  table.tbl.txt td:first-child{font-weight:800; color:var(--navy); font-size:14px}
+  table.tbl.txt td:nth-child(2){font-weight:700; color:var(--blue-d); font-variant-numeric:normal}
+  table.tbl.txt td:last-child{color:#4e5968; font-size:12.5px; line-height:1.6}
+}
+.hint-mobile{display:none; font-size:12px; color:var(--muted); margin:0 0 14px}
+@media (max-width:600px){.hint-mobile{display:block}}
+/* 사례 카드 (연말정산 3가지 케이스) */
+.cases{display:grid; gap:12px; margin:0 0 18px}
+@media(min-width:720px){.cases{grid-template-columns:repeat(3,1fr)}}
+.case{border:1px solid var(--line); border-radius:14px; padding:15px 16px 14px; background:#fbfcfe; min-width:0}
+.case .who{display:inline-block; font-size:11.5px; font-weight:800; color:var(--blue-d); background:var(--sky); border-radius:999px; padding:3px 10px; margin-bottom:9px}
+.case h3{margin:0 0 8px; font-size:15px; line-height:1.45; color:var(--navy)}
+.case p{font-size:13.5px; margin:0 0 10px; color:#4e5968; line-height:1.6}
+.case dl{display:grid; grid-template-columns:1fr auto; gap:4px 8px; margin:0; font-size:12.5px}
+.case dt{color:var(--muted); min-width:0}
+.case dd{margin:0; text-align:right; font-weight:700; font-variant-numeric:tabular-nums; white-space:nowrap}
+.case .res{display:flex; justify-content:space-between; align-items:baseline; gap:8px; margin-top:11px; padding-top:10px; border-top:1px dashed var(--line)}
+.case .res span{font-size:12px; font-weight:700; color:var(--muted)}
+.case .res b{font-size:16px; font-weight:800; color:var(--blue-d); font-variant-numeric:tabular-nums}
+@media (max-width:520px){.case .res b{font-size:15px}}

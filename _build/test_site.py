@@ -102,7 +102,8 @@ def exp_salary(annual, nontax_m, family, kids):
             break
     credit = calc * .55 if calc <= 1.3e6 else 715000 + (calc - 1.3e6) * .3
     cap = 740000 if gross <= 33e6 else 660000 if gross <= 70e6 else 500000 if gross <= 120e6 else 200000
-    credit = min(credit, cap) + kids * 150000
+    kc = 0 if kids <= 0 else 250000 if kids == 1 else 550000 if kids == 2 else 550000 + (kids - 2) * 400000
+    credit = min(credit, cap) + kc
     decided = max(0, calc - credit)
     month_tax = decided / 12 + decided * .1 / 12
     return annual / 12 - ins - month_tax
